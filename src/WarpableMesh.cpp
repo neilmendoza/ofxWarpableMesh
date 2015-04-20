@@ -88,21 +88,21 @@ namespace itg
         switch (args.key)
         {
             case OF_KEY_UP:
-                if (ofGetKeyPressed(OF_KEY_SHIFT)) increment = ofVec3f(-1.f, 0.f, 0.f);
+                if (ofGetKeyPressed(OF_KEY_SHIFT)) increment = ofVec3f(0.f, 0.f, -1.f);
                 else increment = ofVec3f(0.f, 1.f, 0.f);
                 break;
                 
             case OF_KEY_DOWN:
-                if (ofGetKeyPressed(OF_KEY_SHIFT)) increment = ofVec3f(1.f, 0.f, 0.f);
+                if (ofGetKeyPressed(OF_KEY_SHIFT)) increment = ofVec3f(0.f, 0.f, 1.f);
                 else increment = ofVec3f(0.f, -1.f, 0.f);
                 break;
                 
             case OF_KEY_LEFT:
-                increment = ofVec3f(0.f, 0.f, 1.f);
+                increment = ofVec3f(-1.f, 0.f, 0.f);
                 break;
                 
             case OF_KEY_RIGHT:
-                increment = ofVec3f(0.f, 0.f, -1.f);
+                increment = ofVec3f(1.f, 0.f, 0.f);
                 break;
                 
             default:
