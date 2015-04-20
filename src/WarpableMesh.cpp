@@ -111,6 +111,7 @@ namespace itg
         for (unsigned i = 0; i < selectedIndices.size(); ++i)
         {
             getVertices()[selectedIndices[i]] += increment;
+            ofNotifyEvent(vertexMovedEvent, selectedIndices[i], this);
         }
     }
     

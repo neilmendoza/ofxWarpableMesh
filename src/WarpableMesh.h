@@ -60,6 +60,8 @@ namespace itg
         
         void setTransform(const ofMatrix4x4& transform) { this->transform = transform; }
         
+        ofEvent<unsigned> vertexMovedEvent;
+        
     private:
         void onMousePressed(ofMouseEventArgs& args);
         void onKeyPressed(ofKeyEventArgs& args);
