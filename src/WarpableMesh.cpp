@@ -33,7 +33,7 @@
 
 namespace itg
 {
-    WarpableMesh::WarpableMesh() : cam(NULL)
+    WarpableMesh::WarpableMesh() : cam(NULL), incrementScalar(1.f)
     {
     }
     
@@ -88,32 +88,35 @@ namespace itg
         switch (args.key)
         {
             case OF_KEY_UP:
-                if (ofGetKeyPressed(OF_KEY_SHIFT)) increment = ofVec3f(0.f, 0.f, -1.f);
-                else increment = ofVec3f(0.f, 1.f, 0.f);
+                if (ofGetKeyPressed(OF_KEY_SHIFT)) increment = ofVec3f(0.f, 0.f, -incrementScalar);
+                else increment = ofVec3f(0.f, incrementScalar, 0.f);
                 break;
                 
             case OF_KEY_DOWN:
-                if (ofGetKeyPressed(OF_KEY_SHIFT)) increment = ofVec3f(0.f, 0.f, 1.f);
-                else increment = ofVec3f(0.f, -1.f, 0.f);
+                if (ofGetKeyPressed(OF_KEY_SHIFT)) increment = ofVec3f(0.f, 0.f, incrementScalar);
+                else increment = ofVec3f(0.f, -incrementScalar, 0.f);
                 break;
                 
             case OF_KEY_LEFT:
-                increment = ofVec3f(-1.f, 0.f, 0.f);
+                increment = ofVec3f(-incrementScalar, 0.f, 0.f);
                 break;
                 
             case OF_KEY_RIGHT:
-                increment = ofVec3f(1.f, 0.f, 0.f);
+                increment = ofVec3f(incrementScalar, 0.f, 0.f);
                 break;
                 
             default:
                 break;
         }
-        for (unsigned i = 0; i < selectedIndices.size(); ++i)
+        if (increment != ofVec3f::zero())
         {
-            getVertices()[selectedIndices[i]] += increment;
-            ofNotifyEvent(vertexMovedEvent, selectedIndices[i], this);
+            for (unsigned i = 0; i < selectedIndices.size(); ++i)
+            {
+                getVertices()[selectedIndices[i]] += increment;
+                ofNotifyEvent(vertexMovedEvent, selectedIndices[i], this);
+            }
         }
-    }
+    }   
     
     void WarpableMesh::onMousePressed(ofMouseEventArgs& args)
     {

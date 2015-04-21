@@ -60,6 +60,8 @@ namespace itg
         
         void setTransform(const ofMatrix4x4& transform) { this->transform = transform; }
         
+        void setIncrementScalar(float incrementScalar) { this->incrementScalar = incrementScalar; }
+        
         ofEvent<unsigned> vertexMovedEvent;
         
     private:
@@ -73,5 +75,7 @@ namespace itg
         ofRectangle viewport;
         
         ofCamera* cam;
+        
+        float incrementScalar;
     };
 }
