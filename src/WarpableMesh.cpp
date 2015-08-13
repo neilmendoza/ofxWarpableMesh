@@ -77,7 +77,7 @@ namespace itg
         ofSetColor(colour);
         for (unsigned i = 0; i < selectedIndices.size(); ++i)
         {
-            ofCircle(getVertex(selectedIndices[i]), pointSize);
+            ofDrawCircle(getVertex(selectedIndices[i]), pointSize);
         }
         ofPopStyle();
     }
