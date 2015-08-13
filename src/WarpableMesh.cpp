@@ -33,7 +33,7 @@
 
 namespace itg
 {
-    WarpableMesh::WarpableMesh() : cam(NULL), incrementScalar(1.f)
+    WarpableMesh::WarpableMesh() : cam(NULL), incrementScalar(.1f), selectEquidistant(true)
     {
     }
     
@@ -50,7 +50,7 @@ namespace itg
             ofRectangle viewport = customViewport;
             if (viewport.width == 0 && viewport.height == 0) viewport.set(0.f, 0.f, ofGetViewportWidth(), ofGetViewportHeight());
             ofVec2f mouse(screenX, screenY);
-            unsigned selectedIndex;
+            vector<unsigned> newIndices;
             for (unsigned i = 0; i < getNumVertices(); ++i)
             {
                 ofVec2f screenPt = cam->worldToScreen(getVertex(i) * transform, viewport);
@@ -58,12 +58,12 @@ namespace itg
                 if (distSq < minDistSq)
                 {
                     minDistSq = distSq;
-                    selectedIndex = i;
+                    newIndices.assign(1, i);
                 }
+                else if (distSq == minDistSq && selectEquidistant) newIndices.push_back(i);
             }
             if (!selectMultiple) selectedIndices.clear();
-            selectedIndices.push_back(selectedIndex);
-            //ofLogNotice() << "Selected index: " << selectedIndex << ", Selected vertex: " << getVertex(selectedIndex);
+            selectedIndices.insert(selectedIndices.end(), newIndices.begin(), newIndices.end());
         }
         else ofLogError() << "Please set camera before attempting to warp mesh.";
         return sqrt(minDistSq);

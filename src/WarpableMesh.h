@@ -67,6 +67,8 @@ namespace itg
         
         void setIncrementScalar(float incrementScalar) { this->incrementScalar = incrementScalar; }
         
+        void setSelectEquidistant(bool selectEquidistant) { this->selectEquidistant = selectEquidistant; }
+        
         ofEvent<unsigned> vertexMovedEvent;
         
     private:
@@ -74,13 +76,10 @@ namespace itg
         void onKeyPressed(ofKeyEventArgs& args);
         
         ofMatrix4x4 transform;
-        
         vector<unsigned> selectedIndices;
-        
         ofRectangle customViewport;
-        
         ofCamera* cam;
-        
         float incrementScalar;
+        bool selectEquidistant;
     };
 }
