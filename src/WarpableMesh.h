@@ -40,6 +40,8 @@ namespace itg
     public:
         WarpableMesh();
         
+        void operator=(const ofMesh& mesh);
+        
         float selectVertex(int x, int y, bool selectMultiple = false);
         
         float distanceToCentroidSquared(int screenX, int screenY);

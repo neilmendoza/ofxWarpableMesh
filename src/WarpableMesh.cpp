@@ -37,6 +37,11 @@ namespace itg
     {
     }
     
+    void WarpableMesh::operator=(const ofMesh& mesh)
+    {
+        ((ofMesh&)(*this)) = mesh;
+    }
+    
     float WarpableMesh::selectVertex(int screenX, int screenY, bool selectMultiple)
     {
         float minDistSq = numeric_limits<float>::max();
