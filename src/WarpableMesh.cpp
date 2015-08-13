@@ -47,6 +47,7 @@ namespace itg
         float minDistSq = numeric_limits<float>::max();
         if (cam)
         {
+            ofRectangle viewport = customViewport;
             if (viewport.width == 0 && viewport.height == 0) viewport.set(0.f, 0.f, ofGetViewportWidth(), ofGetViewportHeight());
             ofVec2f mouse(screenX, screenY);
             unsigned selectedIndex;
@@ -70,6 +71,7 @@ namespace itg
     
     float WarpableMesh::distanceToCentroidSquared(int screenX, int screenY)
     {
+        ofRectangle viewport = customViewport;
         if (viewport.width == 0 && viewport.height == 0) viewport.set(0.f, 0.f, ofGetViewportWidth(), ofGetViewportHeight());
         ofVec2f mouse(screenX, screenY);
         ofVec2f screenPt = cam->worldToScreen(getCentroid() * transform, viewport);
@@ -82,7 +84,7 @@ namespace itg
         ofSetColor(colour);
         for (unsigned i = 0; i < selectedIndices.size(); ++i)
         {
-            ofDrawCircle(getVertex(selectedIndices[i]), pointSize);
+            ofDrawSphere(getVertex(selectedIndices[i]), pointSize);
         }
         ofPopStyle();
     }
@@ -121,7 +123,21 @@ namespace itg
                 ofNotifyEvent(vertexMovedEvent, selectedIndices[i], this);
             }
         }
-    }   
+    }
+    
+    void WarpableMesh::setEventsEnabled(bool eventsEnabled)
+    {
+        if (eventsEnabled)
+        {
+            enableMouseEvents();
+            enableKeyEvents();
+        }
+        else
+        {
+            disableMouseEvents();
+            disableKeyEvents();
+        }
+    }
     
     void WarpableMesh::onMousePressed(ofMouseEventArgs& args)
     {

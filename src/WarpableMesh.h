@@ -46,11 +46,13 @@ namespace itg
         
         float distanceToCentroidSquared(int screenX, int screenY);
         
-        void setViewport(const ofRectangle& viewport) { this->viewport = viewport; }
+        void setCustomViewport(const ofRectangle& customViewport) { this->customViewport = customViewport; }
         
         void setCamera(ofCamera& cam) { setCamera(&cam); }
         void setCamera(ofCamera* cam) { this->cam = cam; }
         ofCamera* getCamera() const { return cam; }
+        
+        void setEventsEnabled(bool eventsEnabled);
         
         void enableMouseEvents();
         void disableMouseEvents();
@@ -58,8 +60,9 @@ namespace itg
         void enableKeyEvents();
         void disableKeyEvents();
         
-        void drawSelectedVertices(float pointSize = 2.f, const ofColor& colour = ofColor(0, 255, 0));
+        void drawSelectedVertices(float pointSize = 1.f, const ofColor& colour = ofColor(0, 255, 0));
         
+        void setRotation(float x, float y, float z);
         void setTransform(const ofMatrix4x4& transform) { this->transform = transform; }
         
         void setIncrementScalar(float incrementScalar) { this->incrementScalar = incrementScalar; }
@@ -74,7 +77,7 @@ namespace itg
         
         vector<unsigned> selectedIndices;
         
-        ofRectangle viewport;
+        ofRectangle customViewport;
         
         ofCamera* cam;
         
